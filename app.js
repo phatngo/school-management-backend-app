@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require("./db");
+const db = require("./lib/db-client"); // Your mysql2/promise pool
 const app = express();
 app.use(express.json());
 
