@@ -30,7 +30,7 @@ class BaseTable {
 
     const sql = `INSERT INTO ${this.tableName} (${keys.join(", ")}) VALUES (${placeholders})`;
     const [result] = await db.execute(sql, values);
-    return { id: result.insertId, ...data };
+    return await this.getById(result.insertId);
   }
 
   async update(id, data) {
@@ -41,7 +41,7 @@ class BaseTable {
 
     const sql = `UPDATE ${this.tableName} SET ${setClause} WHERE id = ?`;
     await db.execute(sql, [...values, id]);
-    return { id, ...data };
+    return await this.getById(result.insertId);
   }
 
   async delete(id) {
