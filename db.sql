@@ -29,6 +29,13 @@ CREATE TABLE students (
     FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    api_key VARCHAR(36) NOT NULL UNIQUE, -- Store UUIDs here
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- --- INSERT SAMPLE DATA ---
 
 -- Add Teachers
@@ -42,8 +49,14 @@ INSERT INTO classes (name, teacher_id, class_type) VALUES
 ('Grade 1-A', 1, 'primary'),
 ('Math 101', 2, 'elementary'),
 ('Physics Advanced', 3, 'high');
+
 -- Add Students (Linking to Class IDs 1, 2, and 3)
 INSERT INTO students (name, phone_number, class_id) VALUES 
 ('John Doe', '555-0101', 1),
 ('Jane Miller', '555-0202', 2),
 ('Sam Wilson', '555-0303', 3);
+
+-- Sample users with UUIDs
+INSERT INTO users (username, api_key) VALUES 
+('admin_user', 'f47ac10b-58cc-4372-a567-0e02b2c3d479'),
+('dev_client', 'bc9e4776-8800-474d-9377-5264a66a15e6');

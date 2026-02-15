@@ -33,6 +33,17 @@ class BaseTable {
     return { id: result.insertId, ...data };
   }
 
+  async update(id, data) {
+    const keys = Object.keys(data);
+    if (keys.length === 0) return this.getById(id);
+    const values = Object.values(data);
+    const setClause = keys.map((k) => `${k} = ?`).join(", ");
+
+    const sql = `UPDATE ${this.tableName} SET ${setClause} WHERE id = ?`;
+    await db.execute(sql, [...values, id]);
+    return { id, ...data };
+  }
+
   async delete(id) {
     await db.execute(`DELETE FROM ${this.tableName} WHERE id = ?`, [id]);
     return { success: true };
