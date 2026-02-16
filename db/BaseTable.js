@@ -14,6 +14,14 @@ class BaseTable {
     return rows[0] || null;
   }
 
+  async getByMultipleConditions({where}) {
+    const conditions = Object.keys(where).map(key => `${key} = ?`);
+    const values = Object.values(where);
+    const sql = `SELECT * FROM ${this.tableName} WHERE ${conditions.join(" AND ")}`;
+    const [rows] = await db.execute(sql, values);
+    return rows[0] || null;
+  }
+
   async getList(page = 1, limit = 10) {
     const offset = (page - 1) * limit;
     const [rows] = await db.execute(
@@ -41,7 +49,7 @@ class BaseTable {
 
     const sql = `UPDATE ${this.tableName} SET ${setClause} WHERE id = ?`;
     await db.execute(sql, [...values, id]);
-    return await this.getById(result.insertId);
+    return await this.getById(id);
   }
 
   async delete(id) {

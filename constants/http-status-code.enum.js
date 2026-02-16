@@ -23,4 +23,24 @@ const HttpStatusCode = {
 	SERVICE_UNAVAILABLE: 503,
 };
 
-module.exports = HttpStatusCode;
+const HttpStatus = {
+	// Success
+	OK: 'OK',
+	CREATED: 'Created',
+	ACCEPTED: 'Accepted',
+	NO_CONTENT: 'No Content',
+
+	// Client errors
+	BAD_REQUEST: 'BAD_REQUEST',
+	UNAUTHORIZED: 'UNAUTHORIZED',
+	FORBIDDEN: 'FORBIDDEN',
+	NOT_FOUND: 'NOT_FOUND',
+	CONFLICT: 'CONFLICT',
+	UNPROCESSABLE_ENTITY: 'UNPROCESSABLE_ENTITY',
+
+	// Server errors
+	INTERNAL_SERVER_ERROR: 'INTERNAL_SERVER_ERROR',
+	SERVICE_UNAVAILABLE: 'SERVICE_UNAVAILABLE',
+};
+
+module.exports = { HttpStatus, HttpStatusCode };

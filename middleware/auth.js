@@ -19,14 +19,14 @@ const authenticateBasic = async (req, res, next) => {
     );
 
     if (users.length === 0) {
-      return res.status(401).json({ error: "Invalid username or UUID key" });
+      return res.unauthorized();
     }
 
     req.user = users[0];
     next();
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Auth check failed" });
+    res.internalServerError();
   }
 };
 

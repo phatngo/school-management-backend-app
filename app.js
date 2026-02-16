@@ -1,8 +1,11 @@
 require('dotenv').config();
+const responseHandler = require('./middleware/responseHandler');
+
 const express = require("express");
 const app = express();
 
 app.use(express.json());
+app.use(responseHandler);
 
 app.use('/teachers', require('./routes/teacher.route'));
 app.use('/classes', require('./routes/class.route'));
