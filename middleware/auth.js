@@ -4,7 +4,7 @@ const authenticateBasic = async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Basic ")) {
-    return res.status(401).json({ error: "Missing Authorization Header" });
+    return res.unauthorized();
   }
 
   try {

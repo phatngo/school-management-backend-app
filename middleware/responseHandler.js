@@ -1,7 +1,7 @@
 const {
   HttpStatus,
   HttpStatusCode,
-} = require("../constants/http-status-code.enum");
+} = require("../constants/http.enum");
 
 module.exports = (req, res, next) => {
   // 1. Success helper (2xx except 204)
@@ -47,7 +47,7 @@ module.exports = (req, res, next) => {
 
   res.notFound = (resourceName, id) => {
     res.error(
-      `${resourceName} with ID: ${id} is not found`,
+      `${resourceName} with id: ${id} is not found`,
       HttpStatus.NOT_FOUND,
       HttpStatusCode.NOT_FOUND,
     );

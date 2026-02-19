@@ -3,7 +3,7 @@ const db = require("../lib/db-client");
 
 class TeacherTable extends BaseTable {
   constructor() {
-    super("teacher", ["name", "department_id"]);
+    super("teacher", ["name"]);
   }
 }
 

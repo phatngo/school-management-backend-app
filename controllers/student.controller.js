@@ -1,52 +1,49 @@
-const StudentTable = require("../db/StudentTable");
-const HttpStatus = require("../constants/http-status-code.enum");
+const ResourceEnums = require("../constants/resource.enum");
+const ClassRoomTable = require("../db/ClassRoomTable");
+const BaseController = require("./base.controller");
+const asyncHandler = require("../utils/async.handler");
 
-exports.listStudents = async (req, res) => {
-  try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const rows = await StudentTable.getList(page, limit);
-    res.status(HttpStatus.OK).json({ page, limit, data: rows });
-  } catch (err) {
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
+class StudentController extends BaseController {
+  constructor() {
+    super(ResourceEnums.STUDENT);
   }
-};
-
-exports.createStudent = async (req, res) => {
-  try {
+  create = asyncHandler(async (req, res) => {
     const { name, phone_number, class_id } = req.body;
-    const record = await StudentTable.create({ name, phone_number, class_id });
-    res.status(HttpStatus.CREATED).json({ id: record.id });
-  } catch (err) {
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
-  }
-};
+    const isValid = await this.#isValidPayload(req.body, res);
+    if (!isValid) return;
 
-exports.updateStudent = async (req, res) => {
-  try {
+    const record = await this.resourceDb.create({
+      name,
+      phone_number,
+      class_id,
+    });
+
+    res.created(record);
+  });
+
+  update = asyncHandler(async (req, res) => {
+    const isExistingResource = await this.isResourceExist(req.params.id, res);
+    if (!isExistingResource) return;
+
+    const isValid = await this.#isValidPayload(req.body, res);
+    if (!isValid) return;
+
     const { name, phone_number, class_id } = req.body;
-    await StudentTable.update(req.params.id, { name, phone_number, class_id });
-    res.status(HttpStatus.OK).json({ message: "Updated" });
-  } catch (err) {
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
-  }
-};
+    const updatedRecord = await this.resourceDb.update(req.params.id, {
+      name,
+      phone_number,
+      class_id,
+    });
+    res.success(updatedRecord);
+  });
 
-exports.deleteStudent = async (req, res) => {
-  try {
-    await StudentTable.delete(req.params.id);
-    res.status(HttpStatus.OK).json({ message: "Deleted" });
-  } catch (err) {
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
-  }
-};
+  #isValidPayload = async (body, res) => {
+    const existingClass = await ClassRoomTable.getById(body.class_id);
+    if (!existingClass) {
+      return res.notFound(ResourceEnums.CLASS, body.class_id);
+    }
+    return true;
+  };
+}
 
-exports.getStudentById = async (req, res) => {
-  try {
-    const student = await StudentTable.getById(req.params.id);
-    if (!student) return res.status(HttpStatus.NOT_FOUND).json({ message: "Student not found" });
-    res.status(HttpStatus.OK).json(student);
-  } catch (err) {
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
-  }
-};
+module.exports = new StudentController();

@@ -5,6 +5,4 @@ const ResourceEnums = {
   USER: "user",
 };
 
-module.exports = {
-  ResourceEnums,
-};
+module.exports = ResourceEnums

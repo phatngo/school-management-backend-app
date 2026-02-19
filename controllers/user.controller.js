@@ -1,26 +1,26 @@
-const UserTable = require("../db/UserTable");
-const HttpStatus = require("../constants/http-status-code.enum");
-const {returnErrorResponse, returnSuccessResponse} = require("../helpers/response.helpers");
+const BaseController = require("./base.controller");
+const asyncHandler = require("../utils/async.handler");
+const ResourceEnums = require("../constants/resource.enum");
 
-exports.createUser = async (req, res) => {
-  try {
+class UserController extends BaseController {
+  constructor() {
+    super(ResourceEnums.USER);
+  }
+
+  create = asyncHandler(async (req, res) => {
     const { username, api_key } = req.body;
-    const users = await UserTable.getByUsernameAndApiKey(username, api_key);
+    const users = await this.resourceDb.getByUsernameAndApiKey(
+      username,
+      api_key,
+    );
 
     if (users.length) {
-      return returnErrorResponse(
-        res,
-        HttpStatus.CONFLICT,
-        `User with username: ${username} already exists`,
-      );
+      return res.conflict(ResourceEnums.USER);
     }
 
-    const record = await UserTable.create({ username, api_key });
-    return returnSuccessResponse(res, HttpStatus.CREATED, {
-      success: true,
-      data: record,
-    });
-  } catch (err) {
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
-  }
-};
+    const record = await this.resourceDb.create({ username, api_key });
+    return res.created(record);
+  });
+}
+
+module.exports = new UserController();
