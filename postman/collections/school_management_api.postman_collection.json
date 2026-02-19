@@ -1,5 +1,6 @@
 {
   "info": {
+    "_postman_id": "ce69bf06-3d2e-4401-a7a5-ddbdcddac29b",
     "name": "School Management API",
     "description": "API collection for School Management Backend Application",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -10,6 +11,7 @@
       "item": [
         {
           "name": "Create User",
+          "id": "fcb73b1f-5a8b-4aa4-a362-a12e4de17ee2",
           "request": {
             "method": "POST",
             "header": [
@@ -31,206 +33,18 @@
                 "user"
               ]
             }
-          }
+          },
+          "response": []
         }
-      ]
-    },
-    {
-      "name": "Student",
-      "item": [
-        {
-          "name": "List Students",
-          "request": {
-            "auth": {
-              "type": "basic",
-              "basic": [
-                {
-                  "key": "username",
-                  "value": "{{username}}",
-                  "type": "string"
-                },
-                {
-                  "key": "password",
-                  "value": "{{api_key}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/student?page=1&limit=10",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "student"
-              ],
-              "query": [
-                {
-                  "key": "page",
-                  "value": "1"
-                },
-                {
-                  "key": "limit",
-                  "value": "10"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "Create Student",
-          "request": {
-            "auth": {
-              "type": "basic",
-              "basic": [
-                {
-                  "key": "username",
-                  "value": "{{username}}",
-                  "type": "string"
-                },
-                {
-                  "key": "password",
-                  "value": "{{api_key}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"John Doe\",\n  \"phone_number\": \"555-0123\",\n  \"class_id\": 1\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/student",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "student"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Get Student by ID",
-          "request": {
-            "auth": {
-              "type": "basic",
-              "basic": [
-                {
-                  "key": "username",
-                  "value": "{{username}}",
-                  "type": "string"
-                },
-                {
-                  "key": "password",
-                  "value": "{{api_key}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/student/1",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "student",
-                "1"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Update Student",
-          "request": {
-            "auth": {
-              "type": "basic",
-              "basic": [
-                {
-                  "key": "username",
-                  "value": "{{username}}",
-                  "type": "string"
-                },
-                {
-                  "key": "password",
-                  "value": "{{api_key}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"phone_number\": \"555-0456\",\n  \"class_id\": 2\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/student/1",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "student",
-                "1"
-              ]
-            }
-          }
-        },
-        {
-          "name": "Delete Student",
-          "request": {
-            "auth": {
-              "type": "basic",
-              "basic": [
-                {
-                  "key": "username",
-                  "value": "{{username}}",
-                  "type": "string"
-                },
-                {
-                  "key": "password",
-                  "value": "{{api_key}}",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "{{base_url}}/student/1",
-              "host": [
-                "{{base_url}}"
-              ],
-              "path": [
-                "student",
-                "1"
-              ]
-            }
-          }
-        }
-      ]
+      ],
+      "id": "9958a341-d01c-4594-a0e1-47f32234e0c5"
     },
     {
       "name": "Teacher",
       "item": [
         {
           "name": "List Teachers",
+          "id": "f43b3b35-f797-456d-9747-0fadd4d99c02",
           "request": {
             "auth": {
               "type": "basic",
@@ -268,10 +82,12 @@
                 }
               ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Create Teacher",
+          "id": "67028dc6-48de-44de-b96f-582f58a526a0",
           "request": {
             "auth": {
               "type": "basic",
@@ -297,7 +113,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Mr. Smith\",\n  \"department_id\": 1\n}"
+              "raw": "{\n  \"name\": \"Mr. Smith\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/teacher",
@@ -308,10 +124,12 @@
                 "teacher"
               ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Get Teacher by ID",
+          "id": "d6b49493-d9ce-477e-8022-5255aff19db0",
           "request": {
             "auth": {
               "type": "basic",
@@ -340,10 +158,12 @@
                 "1"
               ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Update Teacher",
+          "id": "6c95e9b0-0f5c-447c-bd49-7222501e9a5e",
           "request": {
             "auth": {
               "type": "basic",
@@ -369,7 +189,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Mrs. Johnson\",\n  \"department_id\": 2\n}"
+              "raw": "{\n  \"name\": \"Mrs. Johnson\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/teacher/1",
@@ -381,10 +201,12 @@
                 "1"
               ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Delete Teacher",
+          "id": "6ddad5f6-1455-4655-873c-febd2fa35f6c",
           "request": {
             "auth": {
               "type": "basic",
@@ -413,15 +235,18 @@
                 "1"
               ]
             }
-          }
+          },
+          "response": []
         }
-      ]
+      ],
+      "id": "f69869c0-225b-4acb-b924-47ab65368c9b"
     },
     {
       "name": "Class",
       "item": [
         {
           "name": "List Classes",
+          "id": "be764104-194b-403d-b131-221967665dd5",
           "request": {
             "auth": {
               "type": "basic",
@@ -459,10 +284,12 @@
                 }
               ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Create Class",
+          "id": "7b405572-cdbd-40f8-81ee-3a529ee453c2",
           "request": {
             "auth": {
               "type": "basic",
@@ -488,7 +315,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Class 10A\",\n  \"teacher_id\": 1,\n  \"class_type\": \"Standard\"\n}"
+              "raw": "{\n  \"name\": \"Class 10A\",\n  \"teacher_id\": 1,\n  \"class_type\": \"primary\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/class",
@@ -499,10 +326,12 @@
                 "class"
               ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Get Class by ID",
+          "id": "bbbfd6b1-5202-4a73-8790-69499f7bafda",
           "request": {
             "auth": {
               "type": "basic",
@@ -531,10 +360,12 @@
                 "1"
               ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Update Class",
+          "id": "1d4244c6-0712-490e-8d9b-12f2d0c5513e",
           "request": {
             "auth": {
               "type": "basic",
@@ -560,7 +391,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Class 10B\",\n  \"teacher_id\": 2,\n  \"class_type\": \"Advanced\"\n}"
+              "raw": "{\n  \"name\": \"Class 10B\",\n  \"teacher_id\": 2,\n  \"class_type\": \"primary\"\n}"
             },
             "url": {
               "raw": "{{base_url}}/class/1",
@@ -572,10 +403,12 @@
                 "1"
               ]
             }
-          }
+          },
+          "response": []
         },
         {
           "name": "Delete Class",
+          "id": "1ff36e1b-4210-4e9c-9d02-850bbb263d83",
           "request": {
             "auth": {
               "type": "basic",
@@ -604,23 +437,230 @@
                 "1"
               ]
             }
-          }
+          },
+          "response": []
         }
-      ]
+      ],
+      "id": "d71f49a4-4805-4a54-a0cb-8fa0a0a5da30"
+    },
+    {
+      "name": "Student",
+      "item": [
+        {
+          "name": "List Students",
+          "id": "cb85693f-a6fe-4dcb-84b8-4f8e7d9c07f2",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/student?page=1&limit=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "student"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Student",
+          "id": "a9460120-fcef-4dbd-8f6d-2c3f06c1987f",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"phone_number\": \"555-0123\",\n  \"class_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/student",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "student"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Student by ID",
+          "id": "758205f8-01f7-4db1-b70d-36eec6d8471d",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/student/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "student",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Student",
+          "id": "3b5afb7c-8199-4b8e-9ccb-d6a50e2baa48",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"phone_number\": \"555-0456\",\n  \"class_id\": 2\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/student/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "student",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Student",
+          "id": "9eedffea-4ebe-4a08-9f4b-d867d26314b3",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{api_key}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/student/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "student",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7d46fd5c-bb7e-4d71-89ce-bc088913b429"
     }
   ],
   "variable": [
     {
+      "id": "648c9fb2-e7bc-4963-9d8a-31c7d5380fa3",
       "key": "base_url",
       "value": "http://localhost:3000",
       "type": "string"
     },
     {
+      "id": "5788380a-14ca-4aa0-96ae-3ab8c5348ef1",
       "key": "username",
       "value": "your_username",
       "type": "string"
     },
     {
+      "id": "39f330dc-17b8-455a-a9dd-542e79dd483e",
       "key": "api_key",
       "value": "your_api_key",
       "type": "string"
