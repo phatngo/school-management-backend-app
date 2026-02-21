@@ -26,9 +26,9 @@ const HttpStatusCode = {
 const HttpStatus = {
 	// Success
 	OK: 'OK',
-	CREATED: 'Created',
-	ACCEPTED: 'Accepted',
-	NO_CONTENT: 'No Content',
+	CREATED: 'CREATED',
+	ACCEPTED: 'ACCEPTED',
+	NO_CONTENT: 'NO_CONTENT',
 
 	// Client errors
 	BAD_REQUEST: 'BAD_REQUEST',
