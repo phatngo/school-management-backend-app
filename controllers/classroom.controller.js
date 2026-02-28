@@ -46,21 +46,24 @@ class ClassRoomController extends BaseController {
     });
 
     if (existingClass) {
-      return res.conflict(ResourceEnums.CLASS);
+      res.conflict(ResourceEnums.CLASS);
+      return false;
     }
 
     const existingTeacher = await TeacherTable.getById(body.teacher_id);
     if (!existingTeacher) {
-      return res.notFound(ResourceEnums.TEACHER, body.teacher_id);
+      res.notFound(ResourceEnums.TEACHER, body.teacher_id);
+      return false;
     }
 
     const existingClassType = Object.values(ClassTypesEnums).includes(
       body.class_type,
     );
     if (!existingClassType) {
-      return res.error(
+      res.error(
         `class should be in [${Object.values(ClassTypesEnums).join(", ")}]`,
       );
+      return false;
     }
     return true;
   };

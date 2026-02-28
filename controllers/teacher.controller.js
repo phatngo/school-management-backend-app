@@ -31,12 +31,14 @@ class TeacherController extends BaseController {
     res.success(updatedRecord);
   });
 
-  #isValidPayload = async (body, res) => {
+  #isValidPayload = (body, res) => {
     const name = body.name;
 
     if (!name.length) {
-      return res.error("name should not be empty!");
+      res.error("name should not be empty!");
+      return false;
     }
+    return true;
   };
 }
 

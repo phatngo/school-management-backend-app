@@ -40,7 +40,8 @@ class StudentController extends BaseController {
   #isValidPayload = async (body, res) => {
     const existingClass = await ClassRoomTable.getById(body.class_id);
     if (!existingClass) {
-      return res.notFound(ResourceEnums.CLASS, body.class_id);
+      res.notFound(ResourceEnums.CLASS, body.class_id);
+      return false;
     }
     return true;
   };
