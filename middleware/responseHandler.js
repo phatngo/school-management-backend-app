@@ -1,7 +1,4 @@
-const {
-  HttpStatus,
-  HttpStatusCode,
-} = require("../constants/http.enum");
+const { HttpStatus, HttpStatusCode } = require("../constants/http.enum");
 
 module.exports = (req, res, next) => {
   // 1. Success helper (2xx except 204)
@@ -9,6 +6,26 @@ module.exports = (req, res, next) => {
     return res.status(status).json({
       code: code,
       data: data,
+    });
+  };
+
+  // 1. Success helper (2xx except 204) for list with pagination
+  res.paginatedSuccess = (
+    data,
+    code = HttpStatus.OK,
+    status = HttpStatusCode.OK,
+  ) => {
+    const { rows, from, to, previous_page, next_page, total } = data;
+    return res.status(status).json({
+      code: code,
+      data: {
+        from: from,
+        to: to,
+        previous_page: previous_page,
+        next_page: next_page,
+        total: total,
+        items: rows,
+      },
     });
   };
 
@@ -42,7 +59,7 @@ module.exports = (req, res, next) => {
       `Authorization failed`,
       HttpStatus.UNAUTHORIZED,
       HttpStatusCode.UNAUTHORIZED,
-    )
+    );
   };
 
   res.notFound = (resourceName, id) => {
@@ -66,7 +83,7 @@ module.exports = (req, res, next) => {
       `Something went wrong on the server`,
       HttpStatus.INTERNAL_SERVER_ERROR,
       HttpStatusCode.INTERNAL_SERVER_ERROR,
-    )
+    );
   };
   next();
 };

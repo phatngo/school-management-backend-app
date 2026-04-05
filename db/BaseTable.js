@@ -31,6 +31,13 @@ class BaseTable {
     return rows;
   }
 
+  async getCount() {
+    const [[{ count }]] = await db.execute(
+      `SELECT COUNT(*) AS count FROM ${this.tableName}`
+    );
+    return Number(count);
+  }
+
   async create(data) {
     const keys = Object.keys(data);
     const values = Object.values(data);

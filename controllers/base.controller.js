@@ -30,10 +30,39 @@ class BaseController {
   }
 
   list = asyncHandler(async (req, res) => {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const rows = await this.resourceDb.getList(page, limit);
-    res.success(rows);
+    let numPage;
+    let numLimit;
+
+    if (!req.query.page) {
+      numPage = 1;
+    } else {
+      numPage = parseInt(req.query.page);
+      if (isNaN(numPage) || numPage <= 0) {
+        return res.error(
+          "Invalid page number! Page must be a positive integer.",
+        );
+      }
+    }
+
+    if (!req.query.limit) {
+      numLimit = 10;
+    } else {
+      numLimit = parseInt(req.query.limit);
+      if (isNaN(numLimit) || numLimit <= 0) {
+        return res.error("Invalid limit! Limit must be a positive integer.");
+      }
+    }
+
+    const [rows, total] = await Promise.all([
+      this.resourceDb.getList(numPage, numLimit),
+      this.resourceDb.getCount(),
+    ]);
+    const offset = (numPage - 1) * numLimit;
+    const from = total === 0 ? 0 : offset + 1;
+    const to = offset + rows.length;
+    const previous_page = numPage > 1 ? numPage - 1 : null;
+    const next_page = to < total ? numPage + 1 : null;
+    res.paginatedSuccess({ rows, from, to, previous_page, next_page, total });
   });
 
   get = asyncHandler(async (req, res) => {

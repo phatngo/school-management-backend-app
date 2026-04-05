@@ -32,10 +32,21 @@ class TeacherController extends BaseController {
   });
 
   #isValidPayload = (body, res) => {
+    console.log(body);
+    if (!body || !Object.keys(body).length) {
+      res.error("body is required!");
+      return false;
+    }
+
     const name = body.name;
 
-    if (!name.length) {
-      res.error("name should not be empty!");
+    if (typeof name === "undefined") {
+      res.error("name is required!");
+      return false;
+    }
+
+    if (typeof name !== "string" || !name.length) {
+      res.error("invalid name!");
       return false;
     }
     return true;
