@@ -30,28 +30,13 @@ class BaseController {
   }
 
   list = asyncHandler(async (req, res) => {
-    let numPage;
-    let numLimit;
+    const numPage = req.query.page ? parseInt(req.query.page) : 1;
+    const numLimit = req.query.limit ? parseInt(req.query.limit) : 10;
 
-    if (!req.query.page) {
-      numPage = 1;
-    } else {
-      numPage = parseInt(req.query.page);
-      if (isNaN(numPage) || numPage <= 0) {
-        return res.error(
-          "Invalid page number! Page must be a positive integer.",
-        );
-      }
-    }
-
-    if (!req.query.limit) {
-      numLimit = 10;
-    } else {
-      numLimit = parseInt(req.query.limit);
-      if (isNaN(numLimit) || numLimit <= 0) {
-        return res.error("Invalid limit! Limit must be a positive integer.");
-      }
-    }
+    if (isNaN(numPage) || numPage <= 0)
+      return res.error("Invalid page number! Page must be a positive integer.");
+    if (isNaN(numLimit) || numLimit <= 0)
+      return res.error("Invalid limit! Limit must be a positive integer.");
 
     const [rows, total] = await Promise.all([
       this.resourceDb.getList(numPage, numLimit),
