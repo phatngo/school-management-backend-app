@@ -41,6 +41,45 @@ class ClassRoomController extends BaseController {
   });
 
   #isValidPayload = async (body, res) => {
+    if (!body || !Object.keys(body).length) {
+      res.error("body is required!");
+      return false;
+    }
+
+    const name = body.name;
+    const teacher_id = body.teacher_id;
+    const class_type = body.class_type;
+
+    if (typeof name === "undefined") {
+      res.error("name is required!");
+      return false;
+    }
+
+    if (typeof teacher_id === "undefined") {
+      res.error("teacher_id is required!");
+      return false;
+    }
+
+    if (typeof class_type === "undefined") {
+      res.error("class_type is required!");
+      return false;
+    }
+
+    if (typeof name !== "string" || !name.length) {
+      res.error("invalid name!");
+      return false;
+    }
+
+    if (typeof teacher_id !== "number" || !teacher_id) {
+      res.error("invalid teacher_id!");
+      return false;
+    }
+
+    if (typeof class_type !== "string" || !class_type.length) {
+      res.error("invalid class_type!");
+      return false;
+    }
+
     const existingClass = await this.resourceDb.getByMultipleConditions({
       where: { name: body.name },
     });

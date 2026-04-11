@@ -1,6 +1,6 @@
 const ClassTypesEnums = {
   PRIMARY: "primary",
-  SECONDARY: "secondary",
+  ELEMENTARY: "elementary",
   HIGH: "high",
 };
 

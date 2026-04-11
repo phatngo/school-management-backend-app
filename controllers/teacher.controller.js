@@ -32,7 +32,6 @@ class TeacherController extends BaseController {
   });
 
   #isValidPayload = (body, res) => {
-    console.log(body);
     if (!body || !Object.keys(body).length) {
       res.error("body is required!");
       return false;
