@@ -15,6 +15,15 @@ class ClassRoomController extends BaseController {
     const isValid = await this.#isValidPayload(req.body, res);
     if (isValid !== true) return;
 
+    const existingClass = await this.resourceDb.getByMultipleConditions({
+      where: { name: req.body.name },
+    });
+
+    if (existingClass) {
+      res.conflict(ResourceEnums.CLASS);
+      return false;
+    }
+
     const record = await this.resourceDb.create({
       name,
       teacher_id,
@@ -31,6 +40,17 @@ class ClassRoomController extends BaseController {
 
     const isValid = await this.#isValidPayload(req.body, res);
     if (isValid !== true) return;
+
+    const currentClass = await this.resourceDb.getById(req.params.id);
+    if (currentClass.name !== name) {
+      const existingClass = await this.resourceDb.getByMultipleConditions({
+        where: { name },
+      });
+      if (existingClass) {
+        res.conflict(ResourceEnums.CLASS);
+        return false;
+      }
+    }
 
     const updatedClass = await this.resourceDb.update(req.params.id, {
       name,
@@ -77,15 +97,6 @@ class ClassRoomController extends BaseController {
 
     if (typeof class_type !== "string" || !class_type.length) {
       res.error("invalid class_type!");
-      return false;
-    }
-
-    const existingClass = await this.resourceDb.getByMultipleConditions({
-      where: { name: body.name },
-    });
-
-    if (existingClass) {
-      res.conflict(ResourceEnums.CLASS);
       return false;
     }
 
