@@ -12,12 +12,15 @@ class StudentController extends BaseController {
     const isValid = await this.#isValidPayload(req.body, res);
     if (!isValid) return;
 
+    console.log({ name, phone_number, class_id });
+
     const record = await this.resourceDb.create({
       name,
-      phone_number,
+      phone_number: String(phone_number),
       class_id,
     });
 
+    console.log(record);
     res.created(record);
   });
 
@@ -38,6 +41,26 @@ class StudentController extends BaseController {
   });
 
   #isValidPayload = async (body, res) => {
+    if (typeof body.name !== "string") {
+      res.error("name should be string!");
+    }
+
+    if (typeof body.phone_number !== "string") {
+      res.error("phone number should be string!");
+    }
+
+    if (typeof body.class_id !== "number") {
+      res.error("class_id should be number!");
+    }
+
+    if (body.length <= 0) {
+      res.error("name should not be empty!");
+    }
+
+    if (body.phone_number <= 0) {
+      res.error("phone number should not be empty!");
+    }
+
     const existingClass = await ClassRoomTable.getById(body.class_id);
     if (!existingClass) {
       res.notFound(ResourceEnums.CLASS, body.class_id);
