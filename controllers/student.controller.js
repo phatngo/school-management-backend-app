@@ -53,7 +53,7 @@ class StudentController extends BaseController {
       res.error("class_id should be number!");
     }
 
-    if (body.length <= 0) {
+    if (body.name.length <= 0) {
       res.error("name should not be empty!");
     }
 
